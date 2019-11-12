@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-steps-wrapper',
@@ -12,31 +13,46 @@ export class StepsWrapperComponent implements OnInit {
   smallScreen: boolean;
   isLinear = false;
 
-  secondFormGroup: FormGroup;
-  firstFormGroup: FormGroup;
+  formGroup2: FormGroup;
+  formGroup1: FormGroup;
 
   constructor(
     private _formBuilder: FormBuilder,
     private breakpointObserver: BreakpointObserver
   ) {
-    this.firstFormGroup = this._formBuilder.group({});
+    
+    this.formGroup1 = this._formBuilder.group({});
+    this.formGroup2 = this._formBuilder.group({});
 
+    this.loadVertialOrHorizontalStepper();
+
+  }
+
+  loadVertialOrHorizontalStepper() {
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small
-    ]).subscribe(result => {
-      this.smallScreen = result.matches;
-    });
+    ]).pipe(
+      take(1)
+    )
+      .subscribe(result => {
+        this.smallScreen = result.matches;
+      });
   }
 
-  setFirstFormGroup(fg: FormGroup) {
-    this.firstFormGroup = fg;
+  setFormGroup(fg: FormGroup, id: number) {
+
+    if (id === 1) {
+      this.formGroup1 = fg;
+    }
+
+    if (id === 2) {
+      this.formGroup2 = fg;
+    }
+
   }
 
   ngOnInit() {
 
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
   }
 }

@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { CustomersComponent } from './components/customers/customers.component';
-import { CustomersNewComponent } from './components/customers-new/customers-new.component';
 import { Step1Component } from './components/step1/step1.component';
 import { StepsWrapperComponent } from './components/steps-wrapper/steps-wrapper.component';
 import { DemoMaterialModule } from './material-module';
@@ -11,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Step2Component } from './components/step2/step2.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   imports: [
@@ -21,12 +21,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DemoMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    HighchartsChartModule
   ],
   declarations: [
     AppComponent,
-    CustomersComponent,
-    CustomersNewComponent,
     Step1Component,
+    Step2Component,
     StepsWrapperComponent
   ],
   bootstrap: [AppComponent],

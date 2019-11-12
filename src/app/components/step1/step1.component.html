@@ -1,11 +1,24 @@
 <form [formGroup]="formGroup">
-  <mat-form-field>
+  <mat-form-field style="width: 100%;">
     <input
       matInput
       placeholder="Last name, First name"
       formControlName="firstCtrl"
       required
     />
+
+    <hr />
+
+    <highcharts-chart
+      [Highcharts]="Highcharts"
+      [options]="pieChartLeaseOptions"
+      [(update)]="chartUpdateFlag"
+      (chartInstance)="pieChartLease = $event"
+      style="height: 275px; display: block;"
+    ></highcharts-chart>
+    <hr />
+
+    <button (click)="downloadPdf()">download PDF</button>
   </mat-form-field>
   <div>
     <button mat-button matStepperNext>Next</button>
